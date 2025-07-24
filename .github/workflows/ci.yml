@@ -27,8 +27,8 @@ jobs:
 
     env:
       DJANGO_SECRET_KEY: dummysecretkeyforci
-      DJANGO_SETTINGS_MODULE: azureproj_demo.settings
       DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
+      DJANGO_SETTINGS_MODULE: azureproj_demo.settings
 
     steps:
       - name: Checkout code
@@ -44,11 +44,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libpq-dev build-essential
 
-      - name: Run all steps inside azureproj_demo
+      - name: Run Django commands from azureproj_demo
         run: |
           cd azureproj_demo
-
-          echo "✅ Installing dependencies..."
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
@@ -58,10 +56,8 @@ jobs:
             sleep 2
           done
 
-      - name: Run Django migrations and tests
-        run: |
-          cd azureproj_demo
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          echo "🚀 Running migrations..."
           python manage.py migrate
+
+          echo "✅ Running tests..."
           python manage.py test
