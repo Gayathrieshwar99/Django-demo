@@ -62,7 +62,11 @@ jobs:
           done
 
       - name: Run migrations
-        run: python manage.py migrate
+        run: |
+          cd azureproj_demo
+              python manage.py migrate
 
       - name: Run tests
-        run: python manage.py test
+        run: |
+          cd azureproj_demo 
+             python manage.py test
