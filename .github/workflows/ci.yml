@@ -59,9 +59,9 @@ jobs:
           done
 
       - name: Run migrations
-        working-directory: azureproj_demo
+        working-directory: ./azureproj_demo
         run: python manage.py migrate
 
       - name: Run tests
-        working-directory: azureproj_demo
+        working-directory: ./azureproj_demo
         run: python manage.py test
